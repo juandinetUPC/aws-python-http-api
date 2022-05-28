@@ -1,6 +1,7 @@
+# serverless.yml
+# By: Juan Diego Cubillos
 service: users
 frameworkVersion: '3'
-
 provider:
   name: aws
   runtime: python3.8
@@ -12,7 +13,7 @@ provider:
       Resource: 
         - arn:aws:dynamodb:us-east-2:969794511691:table/Users
 
-
+#Serverless Functions
 functions:
   create:
     handler: create.handler
@@ -49,6 +50,7 @@ functions:
           path: users
           method: get
 
+# serverless resources
 resources:
   Resources:
     UsersTable:
@@ -62,5 +64,3 @@ resources:
         KeySchema:
           - AttributeName: userid
             KeyType: HASH
-        
-        

@@ -30,6 +30,7 @@ def handler(event, context):
         #Si existe el usuario, procede a actualizarlo
         antes = table.get_item( TableName="Users", Key = { "userid": Decimal(userId) } )
         if 'Item' in antes:
+            antes = antes['Item']
             result = table.update_item(
                 Key={
                     'userid': Decimal(userId)
@@ -45,7 +46,7 @@ def handler(event, context):
                 UpdateExpression='SET #todo_username = :username, #todo_age = :age',
                 ReturnValues='UPDATED_NEW'
                 )
-            despues = table.get_item( TableName="Users", Key = { "userid": Decimal(userId) } )
+            despues = table.get_item( TableName="Users", Key = { "userid": Decimal(userId) } )['Item']
             body = {
                 "Message": "Usuario actualizado",
                 "ANTES": antes,
