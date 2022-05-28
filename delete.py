@@ -39,6 +39,8 @@ def handler(event, context):
 
         return response
     except:
+        #Si ocurre un error lo mandamos al log de AWS
         logger.exception(f'Error al tratar de consultar la base de datos !! {userId}')
+        #Si encuentra un error, retorna un 500
         return buildResponse(500,{'Message':'Error al tratar de eliminar el usuario'})
         

@@ -17,5 +17,6 @@ def buildResponse(statusCode,body=None):
        }
    }
     if body is not None:
+        #Si no se recibe un body, se devuelve un None
         response['body']=json.dumps(body,cls=CustomEncoder)
     return response

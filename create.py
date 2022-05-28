@@ -1,26 +1,35 @@
 import json
 import boto3
-
+from decimal import Decimal
+from custom_encoder import buildResponse
+import logging
+logger=logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def handler(event, context):
    
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('Users')
-   
     item = json.loads(event.get('body'))
-    #test
-    #item = event
-   
-    table.put_item(Item=item)
+    userId=item.get('userid')
+       
+    try:
+        ifExist = table.get_item( TableName="Users", Key = { "userid": Decimal(userId) } )
+        
+        if 'Item' in ifExist:
+            #Si existe el usuario, envía el mensaje de error
+            return buildResponse(400,{'Message':'Usuario ya existe'})
+        
+        else:
+            #Si no existe el usuario, lo inserta en la tabla    
+            table.put_item(Item=item)
 
-    body = {
-        "mensaje": "Usuario creado",
-        "datos": item
-    }
-
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
-
-    return response
+            body = {
+                "mensaje": "Usuario creado",
+                "User": item
+            }
+            response = buildResponse(201,body)
+            return response
+    except:
+        logger.exception(f'Error al tratar de conectarse a la base de datos !! {userId}')
+        return buildResponse(500,{'Message':'Error al tratar de crear el usuario'})
