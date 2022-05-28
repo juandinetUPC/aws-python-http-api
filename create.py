@@ -18,7 +18,9 @@ def handler(event, context):
         
         if 'Item' in ifExist:
             #Si existe el usuario, envía el mensaje de error
-            return buildResponse(400,{'Message':'Usuario ya existe'})
+            body={'Message':'Usuario ya existe',
+                  "User":ifExist['Item']}
+            return buildResponse(202,body)
         
         else:
             #Si no existe el usuario, lo inserta en la tabla    
