@@ -11,7 +11,7 @@ provider:
       Action:
         - DynamoDB:*
       Resource: 
-        - arn:aws:dynamodb:us-east-2:969794511691:table/Users
+        - [YOUR ARN:AWS ADRESS]
 
 #Serverless Functions
 functions:
