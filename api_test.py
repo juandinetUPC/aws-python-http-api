@@ -24,8 +24,9 @@ class TestBuildResponse(unittest.TestCase):
 #Prueba el método create
 class TestCreate(unittest.TestCase):
     def test_create_user(self):
+        userid = 111111111
         payload = {
-            "userid": 111111111,
+            "userid": userid,
             "username": "Pepito Perez",
             "age": 29
         }
@@ -51,3 +52,63 @@ class TestRead(unittest.TestCase):
         response = requests.get(f'{base_url}user/99999999')
         self.assertEqual(response.status_code,404)
         self.assertEqual(response.json(), {'Message': 'userid:99999999 not found'})
+        
+#Prueba el método update
+class TestUpdate(unittest.TestCase):
+    #Prueba el método update con un usuario existente
+    def test_update_user(self):
+        userid=1
+        payload = {
+            "username": "Juan Diego Cubillos",
+            "age": 35
+        }
+        response = requests.put(f'{base_url}user/{userid}', json=payload)
+        if response.status_code == 200:
+            self.assertEqual(response.status_code,200)
+            payload['userid']=userid
+            self.assertEqual(response.json()['Message'], 'Usuario actualizado')
+        elif response.status_code == 404:
+            self.assertEqual(response.status_code,404)
+            self.assertEqual(response.json()['Message'],  'Usuario no encontrado')
+    #Prueba el método update con un userid que no existe
+    def test_update_user_notfound(self):
+        userid=999999999
+        payload = {
+            "username": "Juan Diego Cubillos",
+            "age": 35
+        }
+        response = requests.put(f'{base_url}user/{userid}', json=payload)
+        if response.status_code == 200:
+            self.assertEqual(response.status_code,200)
+            payload['userid']=userid
+            self.assertEqual(response.json()['Message'], 'Usuario actualizado')
+        elif response.status_code == 404:
+            self.assertEqual(response.status_code,404)
+            self.assertEqual(response.json()['Message'],  'Usuario no encontrado')
+
+#Prueba el método delete
+class TestDelete(unittest.TestCase):
+    #Prueba el método delete con un usuario existente
+    def test_delete_user(self):
+        userid = 1
+        response = requests.delete(f'{base_url}user/{userid}')
+        if response.status_code == 200:
+            self.assertEqual(response.status_code,200)
+            self.assertEqual(response.json()['Message'], 'success')
+            print("Usuario eliminado")
+        elif response.status_code == 404:
+            self.assertEqual(response.status_code,404)
+            self.assertEqual(response.json()['Message'],  'Usuario no encontrado')
+            print("Usuario no encontrado")
+    #Prueba el método delete con un userid que no existe
+    def test_delete_user_notfound(self):
+        userid=999999999
+        response = requests.delete(f'{base_url}user/{userid}')
+        if response.status_code == 200:
+            self.assertEqual(response.status_code,200)
+            self.assertEqual(response.json()['Message'], 'Usuario eliminado')
+            print("Usuario eliminado")
+        elif response.status_code == 404:
+            self.assertEqual(response.status_code,404)
+            self.assertEqual(response.json()['Message'],  'Usuario no encontrado')
+            print("Usuario no encontrado")
