@@ -112,3 +112,17 @@ class TestDelete(unittest.TestCase):
             self.assertEqual(response.status_code,404)
             self.assertEqual(response.json()['Message'],  'Usuario no encontrado')
             print("Usuario no encontrado")
+            
+#Prueba el método list
+class TestList(unittest.TestCase):
+    #Prueba el método listar todos los usuarios
+    def test_list_user(self):
+        userid=1
+        response = requests.get(f'{base_url}users')
+        #Solo se comprueba el status code porque el body es una lista variable
+        if response.status_code == 200:
+            self.assertEqual(response.status_code,200)
+        else:
+            self.assertEqual(response.status_code,204)
+            self.assertEqual(response.json()['Message'], 'La tabla está vacía')
+    

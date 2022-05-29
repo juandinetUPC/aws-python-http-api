@@ -11,7 +11,7 @@ def handler(event, context):
     if 'Items' in result:
         #Si hay usuarios, devuelve la lista
         body = {
-            "mensaje": "Usuarios",
+            "Message": "Usuarios",
             "datos":result['Items']
         }
         response = buildResponse(200,body)
@@ -19,9 +19,9 @@ def handler(event, context):
     else:
         #Si no hay usuarios, devuelve el mensaje de error
         body = {
-            "mensaje": "Usuario no encontrado",
+            "Message": "La tabla está vacía",
             "datos": result
         }
-        response = buildResponse(408,body)
+        response = buildResponse(204,body)
 
     return response

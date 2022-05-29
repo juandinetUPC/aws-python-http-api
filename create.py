@@ -27,7 +27,7 @@ def handler(event, context):
             table.put_item(Item=item)
 
             body = {
-                "mensaje": "Usuario creado",
+                "Message": "Usuario creado",
                 "User": item
             }
             response = buildResponse(201,body)
