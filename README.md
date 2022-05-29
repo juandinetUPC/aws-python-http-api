@@ -1,17 +1,28 @@
-# TODO: modificar el readme
+# API python, usando Lambda Functions y DynamoDB en AWS
+## By: Juan Diego Cubillos Maestre
+### [Github](https://github.com/juandinetUPC)
+### [LinkedIn](https://linkedin.com/in/juan-diego-cubillos-630654195)
 ## En un entorno virtual usando Python3 , pip y la siguiente lista de dependencias (requirements.txt)
-- click==8.1.3
-- colorama==0.4.4
-- Flask==2.1.2
-- Flask-MySQLdb==1.0.1
-- importlib-metadata==4.11.3
-- itsdangerous==2.1.2
-- Jinja2==3.1.2
-- MarkupSafe==2.1.1
-- mysqlclient==2.1.0
-- Werkzeug==2.1.2
-- zipp==3.8.0
+para exportar los requerimientos de la aplicación(sejecuta al final):
+```pip freeze > requirements.txt```
+- boto3==1.23.9
+- botocore==1.26.10
+- certifi==2022.5.18.1
+- charset-normalizer==2.0.12
+- idna==3.3
+- jmespath==1.0.0
+- python-dateutil==2.8.2
+- requests==2.27.1
+- s3transfer==0.5.2
+- six==1.16.0
+- urllib3==1.26.9
 
+Adicionalmente se debe instalar AWS CLI (https://aws.amazon.com/cli/)
+y generar una llave de acceso AWS (https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) para poder usar el comando aws.
+
+Instalar serverless
+
+```pip install serverless```
 
 
 Si no está instalado, instalamos virtualenv
@@ -41,11 +52,11 @@ pip install -r .\requirements.txt
 Para correr la solución se ejecuta el siguiente comando:
 
 ```powershell
-python .\src\app.py
+serverless deploy --verbose
 ```
 
 Para correr los test unitarios se ejecuta el siguiente comando:
 
 ```powershell
-python .\src\test_app.py
+python .\api_test.py
 ```
