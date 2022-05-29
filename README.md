@@ -1,7 +1,14 @@
-# API python, usando Lambda Functions y DynamoDB en AWS
+# API AWS, usando Lambda Functions programadas en Python y usando DynamoDB(AWS)
+
 ## By: Juan Diego Cubillos Maestre
 ### [Github](https://github.com/juandinetUPC)
 ### [LinkedIn](https://linkedin.com/in/juan-diego-cubillos-630654195)
+
+## Diseño de la Solución
+
+![avatar](API_Python_AWS_Lambda_DynamoDB.png)
+
+
 ## En un entorno virtual usando Python3 , pip y la siguiente lista de dependencias (requirements.txt)
 para exportar los requerimientos de la aplicación(sejecuta al final):
 ```pip freeze > requirements.txt```
@@ -60,3 +67,6 @@ Para correr los test unitarios se ejecuta el siguiente comando:
 ```powershell
 python .\api_test.py
 ```
+![avatar](2022-05-29_15h23_40.png)
+
+![avatar](2022-05-28_23h02_13.png)

@@ -1,15 +1,7 @@
 #API unit test
 from decimal import Decimal
-from json import JSONEncoder
-import json
 import unittest
 import requests
-
-import create
-import read
-import update
-import delete
-import list
 import custom_encoder
 
 base_url='https://jkudehd1l6.execute-api.us-east-2.amazonaws.com/dev/'
